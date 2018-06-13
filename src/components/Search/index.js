@@ -50,14 +50,10 @@ class Search extends Component {
     });
   }
   onItemClick = event => {
-    console.log(event.currentTarget.dataset.value);
-
     return this.props.clickitem(event);
   };
 
   render() {
-    console.log(this.props);
-
     return (
       <section>
         <section className="search">
@@ -82,6 +78,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
+	
   clickitem: event =>
     dispatch({
       type: NEW_SELECT,
