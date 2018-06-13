@@ -55,7 +55,6 @@ class Search extends Component {
 
   render() {
     return (
-      <section>
         <section className="search">
           <Input
             placeholder="Search..."
@@ -65,7 +64,6 @@ class Search extends Component {
           />
           <List celled>{this.contactsInject()}</List>
         </section>
-      </section>
     );
   }
 }
