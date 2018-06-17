@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import "./index.css";
 import { connect } from "react-redux";
-import { Item, Icon } from "semantic-ui-react";
+import { Item, Icon, Button } from "semantic-ui-react";
+import { removeContact, requestData } from "../../actions";
 
 class ContactDetail extends Component {
   constructor(props) {
@@ -12,9 +13,12 @@ class ContactDetail extends Component {
     };
   }
   contactInjector() {
-    return this.props.contact.map(contact => {
+    return Object.entries(this.props.contact).map(contact => {
+      //   console.log(contact[1]);
+      let key = contact[1][0];
+      contact = contact[1][1];
       return (
-        <Item.Group key={contact.id}>
+        <Item.Group key={key}>
           <Item>
             <Item.Content>
               <Item.Header className="ContactDetails-name">
@@ -59,23 +63,32 @@ class ContactDetail extends Component {
               </Item.Description>
             </Item.Content>
           </Item>
+          <Button.Group attached="bottom">
+            <Button onClick={this.handleClick.bind(this)}>Remove</Button>
+            <Button.Or />
+            <Button>Edit</Button>
+          </Button.Group>
         </Item.Group>
       );
     });
+  }
+  handleClick(e) {
+    // console.log(this.props.contact[0][0]);
+    this.props.removeContact(this.props.contact[0][0], this.props.uid);
   }
 
   render() {
     if (!this.props.selected) {
       return (
         <section className="ContactDetail">
-            <div className="contact"> Select contact...</div>
+          <div className="contact"> Select contact...</div>
         </section>
       );
     } else {
       return (
         <section className="ContactDetail">
-            <div className="contact">Contact Info</div>
-            {this.contactInjector()}
+          <div className="contact">Contact Info</div>
+          {this.contactInjector()}
         </section>
       );
     }
@@ -83,10 +96,22 @@ class ContactDetail extends Component {
 }
 
 const mapStateToProps = state => {
+	console.log(state);
+	
   return {
     contact: state.request.contact,
+    uid: state.auth.uid,
     selected: state.request.selected
   };
 };
+const mapDispatchToProps = dispatch => {
+	requestData()
+  return {
+    removeContact: (key, uid) => dispatch(removeContact(key, uid))
+  };
+};
 
-export default connect(mapStateToProps)(ContactDetail);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ContactDetail);

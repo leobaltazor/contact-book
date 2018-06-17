@@ -1,6 +1,11 @@
 import { combineReducers } from "redux";
 import { routerReducer } from "react-router-redux";
-import { NEW_SELECT, REQUEST_DATA, SET_AUTH_PARAMS } from "../types";
+import {
+  NEW_SELECT,
+  REQUEST_DATA,
+  SET_AUTH_PARAMS,
+  REMOVE_SELECT
+} from "../types";
 
 const init = {
   getStatus: null,
@@ -9,19 +14,27 @@ const init = {
   selected: false
 };
 const initAuth = {
-	status: false,
-	token: localStorage.getItem("token"),
-	errorMsg: ""
-}
+  status: false,
+  token: localStorage.getItem("token"),
+  errorMsg: "",
+  uid: ""
+};
 
 function request(state = init, action) {
   if (action.type === NEW_SELECT) {
     return {
       ...state,
       selected: true,
-      contact: state.contactarr.filter(el => {
-        return el.id === +action.contact;
+      contact: Object.entries(state.contactarr).filter(el => {
+        return el[0] === action.contact;
       })
+    };
+  }
+  if (action.type === REMOVE_SELECT) {
+    delete action.type;
+    return {
+      ...state,
+      ...action
     };
   }
   if (action.type === REQUEST_DATA) {

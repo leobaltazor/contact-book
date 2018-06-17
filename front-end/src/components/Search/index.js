@@ -22,20 +22,27 @@ class Search extends Component {
     }, 2000);
   }
   contactsInject() {
-    return this.state.showedUser.map(el => {
-      return (
-        <List.Item
-          key={el.id}
-          onClick={this.onItemClick.bind(this)}
-          value={el.id.toString()}
-        >
-          <List.Content>
-            <List.Header>{el.name}</List.Header>
-            {el.phone}
-          </List.Content>
-        </List.Item>
-      );
-    });
+    console.log(this.state.showedUser);
+
+    if (this.state.showedUser !== null) {
+      return Object.entries(this.state.showedUser).map(el => {
+        //   console.log(el[1]);
+        let key = el[0];
+        el = el[1];
+        return (
+          <List.Item
+            key={key}
+            onClick={this.onItemClick.bind(this)}
+            value={key.toString()}
+          >
+            <List.Content>
+              <List.Header>{el.name}</List.Header>
+              {el.phone}
+            </List.Content>
+          </List.Item>
+        );
+      });
+    }
   }
   handleSearch(event) {
     let searchTarget = event.target.value.toLowerCase();
@@ -62,7 +69,7 @@ class Search extends Component {
           fluid
           onInput={this.handleSearch.bind(this)}
         />
-        
+
         <List celled>{this.contactsInject()}</List>
       </section>
     );
