@@ -1,11 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";
+import { Form, Checkbox } from "semantic-ui-react";
 
 class EditContact extends Component {
   constructor(props) {
     super(props);
   }
+  style = {
+    width: "500px",
+    margin: "0 auto"
+  };
   componentWillReceiveProps(props) {
     console.log(props);
 
@@ -23,7 +28,38 @@ class EditContact extends Component {
     }
   }
   render() {
-    return <div>edit contact</div>;
+    return (
+      <Form style={this.style}>
+        <Form.Group widths="equal">
+          <Form.Field>
+            <label>First Name contact.name</label>
+            <input placeholder="First Name" />
+          </Form.Field>
+          <Form.Field>
+            <label>Last Name contact.lastname</label>
+            <input placeholder="Last Name" />
+          </Form.Field>
+        </Form.Group>
+        <Form.Field>
+          <label>contact.company.name</label>
+          <input placeholder="First Name" />
+        </Form.Field>
+        <Form.Group widths="equal">
+          <Form.Field>
+            <label>contact.email</label>
+            <input placeholder="First Name" />
+          </Form.Field>
+          <Form.Field>
+            <label>contact.phone</label>
+            <input placeholder="Last Name" />
+          </Form.Field>
+        </Form.Group>
+        <Form.Field>
+          <Checkbox label="I agree to the Terms and Conditions" />
+        </Form.Field>
+        <Form.Button type="submit">Submit</Form.Button>
+      </Form>
+    );
   }
 }
 

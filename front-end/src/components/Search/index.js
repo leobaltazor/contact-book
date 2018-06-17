@@ -17,15 +17,16 @@ class Search extends Component {
     requestData();
     setTimeout(() => {
       this.setState({
-        showedUser: this.props.contactar
+        showedUser: Object.entries(this.props.contactar)
       });
     }, 2000);
   }
   contactsInject() {
-    console.log(this.state.showedUser);
+	  let data = this.state.showedUser
+    // console.log(data);
 
     if (this.state.showedUser !== null) {
-      return Object.entries(this.state.showedUser).map(el => {
+      return this.state.showedUser.map(el => {
         //   console.log(el[1]);
         let key = el[0];
         el = el[1];
@@ -47,8 +48,14 @@ class Search extends Component {
   handleSearch(event) {
     let searchTarget = event.target.value.toLowerCase();
     let data = this.props.contactar;
-    let showedUser = data.filter(function(el) {
+    // console.log(Object.entries(data));
+
+    let showedUser = Object.entries(data).filter(function(el) {
+      el = el[1];
       let serchValue = el.name.toLowerCase();
+    //   console.log(searchTarget);
+    //   console.log(serchValue);
+    //   console.log(serchValue.indexOf(searchTarget) !== -1);
       return serchValue.indexOf(searchTarget) !== -1;
     });
     this.setState({
@@ -61,6 +68,8 @@ class Search extends Component {
   };
 
   render() {
+    // console.log(this.state);
+
     return (
       <section className="search">
         <Input

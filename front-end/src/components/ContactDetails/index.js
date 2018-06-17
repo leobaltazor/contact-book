@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import "./index.css";
 import { connect } from "react-redux";
 import { Item, Icon, Button } from "semantic-ui-react";
-import { removeContact, requestData } from "../../actions";
+import { removeContact } from "../../actions";
+import { push } from "react-router-redux";
 
 class ContactDetail extends Component {
   constructor(props) {
@@ -22,7 +23,7 @@ class ContactDetail extends Component {
           <Item>
             <Item.Content>
               <Item.Header className="ContactDetails-name">
-                {contact.name}
+                {contact.name} {contact.lastname}
               </Item.Header>
               <Item.Meta className="ContactDetails-job">
                 {contact.company.name}
@@ -66,7 +67,7 @@ class ContactDetail extends Component {
           <Button.Group attached="bottom">
             <Button onClick={this.handleClick.bind(this)}>Remove</Button>
             <Button.Or />
-            <Button>Edit</Button>
+            <Button onClick={this.editContact.bind(this)}>Edit</Button>
           </Button.Group>
         </Item.Group>
       );
@@ -75,6 +76,9 @@ class ContactDetail extends Component {
   handleClick(e) {
     // console.log(this.props.contact[0][0]);
     this.props.removeContact(this.props.contact[0][0], this.props.uid);
+  }
+  editContact() {
+    this.props.redirect("/editcontact");
   }
 
   render() {
@@ -96,8 +100,8 @@ class ContactDetail extends Component {
 }
 
 const mapStateToProps = state => {
-	console.log(state);
-	
+//   console.log(state);
+
   return {
     contact: state.request.contact,
     uid: state.auth.uid,
@@ -105,9 +109,9 @@ const mapStateToProps = state => {
   };
 };
 const mapDispatchToProps = dispatch => {
-	requestData()
   return {
-    removeContact: (key, uid) => dispatch(removeContact(key, uid))
+    removeContact: (key, uid) => dispatch(removeContact(key, uid)),
+    redirect: url => dispatch(push(url))
   };
 };
 

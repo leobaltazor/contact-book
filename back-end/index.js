@@ -33,6 +33,8 @@ app.post("/api/auth", function(req, res) {
       .auth()
       .signInWithEmailAndPassword(login, password)
       .then(data => {
+        console.log("login " + data.user.uid);
+
         res.json({ token: login + Math.random(), uid: data.user.uid });
       })
       .catch(function(error) {
