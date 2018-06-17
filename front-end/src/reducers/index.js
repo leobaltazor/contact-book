@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
-import { NEW_SELECT, REQUEST_DATA } from "../types";
+import { routerReducer } from "react-router-redux";
+import { NEW_SELECT, REQUEST_DATA, SET_AUTH_PARAMS } from "../types";
 
 const init = {
   getStatus: null,
@@ -7,12 +8,17 @@ const init = {
   contactarr: [],
   selected: false
 };
+const initAuth = {
+	status: false,
+	token: localStorage.getItem("token"),
+	errorMsg: ""
+}
 
-export function request(state = init, action) {
+function request(state = init, action) {
   if (action.type === NEW_SELECT) {
     return {
-	  ...state,
-	  selected: true,
+      ...state,
+      selected: true,
       contact: state.contactarr.filter(el => {
         return el.id === +action.contact;
       })
@@ -27,7 +33,20 @@ export function request(state = init, action) {
   }
   return state;
 }
+function auth(state = initAuth, action) {
+  //   console.log(action);
+  if (action.type === SET_AUTH_PARAMS) {
+    delete action.type;
+    return {
+      ...state,
+      ...action
+    };
+  }
+  return state;
+}
 
 export default combineReducers({
-  request
+  routing: routerReducer,
+  request,
+  auth
 });

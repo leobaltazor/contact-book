@@ -55,15 +55,16 @@ class Search extends Component {
 
   render() {
     return (
-        <section className="search">
-          <Input
-            placeholder="Search..."
-            icon="search"
-            fluid
-            onInput={this.handleSearch.bind(this)}
-          />
-          <List celled>{this.contactsInject()}</List>
-        </section>
+      <section className="search">
+        <Input
+          placeholder="Search..."
+          icon="search"
+          fluid
+          onInput={this.handleSearch.bind(this)}
+        />
+        
+        <List celled>{this.contactsInject()}</List>
+      </section>
     );
   }
 }
@@ -76,7 +77,6 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-	
   clickitem: event =>
     dispatch({
       type: NEW_SELECT,

@@ -67,19 +67,15 @@ class ContactDetail extends Component {
   render() {
     if (!this.props.selected) {
       return (
-        <section>
-          <div className="ContactDetail">
+        <section className="ContactDetail">
             <div className="contact"> Select contact...</div>
-          </div>{" "}
         </section>
       );
     } else {
       return (
-        <section>
-          <div className="ContactDetail">
+        <section className="ContactDetail">
             <div className="contact">Contact Info</div>
             {this.contactInjector()}
-          </div>
         </section>
       );
     }

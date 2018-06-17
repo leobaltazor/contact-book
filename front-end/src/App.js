@@ -1,16 +1,16 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import "./App.css";
-//import components
-import Search from "./components/Search";
-import ContactDetails from "./components/ContactDetails";
+import { Route } from "react-router";
+import Auth from "./page/auth";
+import Main from "./page/main";
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <Search />
-        <ContactDetails />
-      </div>
+        <Fragment>
+          <Route exact path="/" component={Main} />
+          <Route path="/auth" component={Auth} />
+        </Fragment>
     );
   }
 }
