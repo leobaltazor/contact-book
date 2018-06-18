@@ -22,7 +22,7 @@ class Search extends Component {
     }, 2000);
   }
   contactsInject() {
-	  let data = this.state.showedUser
+    //   let data = this.state.showedUser
     // console.log(data);
 
     if (this.state.showedUser !== null) {
@@ -53,9 +53,9 @@ class Search extends Component {
     let showedUser = Object.entries(data).filter(function(el) {
       el = el[1];
       let serchValue = el.name.toLowerCase();
-    //   console.log(searchTarget);
-    //   console.log(serchValue);
-    //   console.log(serchValue.indexOf(searchTarget) !== -1);
+      //   console.log(searchTarget);
+      //   console.log(serchValue);
+      //   console.log(serchValue.indexOf(searchTarget) !== -1);
       return serchValue.indexOf(searchTarget) !== -1;
     });
     this.setState({
@@ -86,6 +86,8 @@ class Search extends Component {
 }
 
 const mapStateToProps = state => {
+  console.log(state);
+
   return {
     getStatus: state.request.getStatus,
     contactar: state.request.contactarr

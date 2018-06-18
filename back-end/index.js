@@ -70,52 +70,57 @@ app.get("/users", function(req, res) {
   //   res.json(users);
 });
 
-app.get("/api/add", function(req, res) {
-  uid = "Ptrl8Eru0DO0yzlGIaFQ47314xB2";
+app.post("/api/add", function(req, res) {
+  //   uid = "Ptrl8Eru0DO0yzlGIaFQ47314xB2";
   //   addUser(uid);
-  writeUserData(uid);
+  let uid = req.body.uid;
+  let data = req.body.data;
+  writeUserData(uid, data);
 });
 
-function addUser(uid) {
-  _DB.ref("user/" + uid).set({});
-}
-
 function writeUserData(uid, data) {
+  console.log(data);
   _DB
     .ref()
     .child("user")
     .child(uid)
     .push()
-    .set({
-      id: 10,
-      name: "Leanne Graham",
-      username: "Bret",
-      email: "Sincere@april.biz",
-      address: {
-        street: "Kulas Light",
-        suite: "Apt. 556",
-        city: "Gwenborough",
-        zipcode: "92998-3874",
-        geo: {
-          lat: "-37.3159",
-          lng: "81.1496"
-        }
-      },
-      phone: "1-770-736-8031 x56442",
-      website: "hildegard.org",
-      company: {
-        name: "Romaguera-Crona",
-        catchPhrase: "Multi-layered client-server neural-net",
-        bs: "harness real-time e-markets"
-      }
-    });
+    .set(data);
+}
+
+app.post("/api/update", function(req, res) {
+  //   uid = "Ptrl8Eru0DO0yzlGIaFQ47314xB2";
+  //   addUser(uid);
+  //   console.log(req.body);
+
+  let uid = req.body.uid;
+  let data = req.body.data;
+  let contact = req.body.contact;
+  UpdateUserData(uid, contact, data);
+});
+
+function UpdateUserData(uid, contact, data) {
+  console.log(uid);
+  console.log(contact);
+  console.log(data);
+  _DB
+    .ref()
+    .child("user")
+    .child(uid)
+    .child(contact)
+    .update(data);
 }
 
 app.post("/api/remove", function(req, res) {
-  console.log(req.body.uid);
   let uid = req.body.uid;
   let contact = req.body.key;
-  removeUserData(uid, contact);
+  console.log(uid);
+  console.log(contact);
+  try {
+    removeUserData(uid, contact);
+  } catch (e) {
+    console.log(e);
+  }
 });
 
 function removeUserData(uid, contact) {
@@ -127,4 +132,4 @@ function removeUserData(uid, contact) {
     .remove();
 }
 
-app.listen(3001, () => console.log("server run"));
+app.listen(3001, () => console.log("server run 3001"));

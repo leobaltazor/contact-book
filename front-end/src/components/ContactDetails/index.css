@@ -1,12 +1,13 @@
 section {
   width: 50%;
+  margin-top: 50px;
+  margin-top: 50px;
 }
 
 section .ContactDetail {
   padding: 2px;
   text-align: left;
   padding: 10px;
-  height: 358px;
 }
 
 section .ContactDetail > .contact {

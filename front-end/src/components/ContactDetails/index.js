@@ -75,7 +75,7 @@ class ContactDetail extends Component {
   }
   handleClick(e) {
     // console.log(this.props.contact[0][0]);
-    this.props.removeContact(this.props.contact[0][0], this.props.uid);
+	this.props.removeContact(this.props.contact[0][0], this.props.uid);
   }
   editContact() {
     this.props.redirect("/editcontact");

@@ -70,8 +70,8 @@ export const logout = () => {
 
 export const removeContact = (key, uid) => {
   console.log("removeContact");
-//   console.log(key);
-//   console.log(uid);
+  //   console.log(key);
+  //   console.log(uid);
   fetch("http://localhost:3001/api/remove", {
     method: "POST",
     headers: {
@@ -80,6 +80,49 @@ export const removeContact = (key, uid) => {
     body: JSON.stringify({
       key: key,
       uid: uid
+    })
+  });
+  return {
+    type: NEW_SELECT,
+    selected: false,
+    contact: [{ name: "" }]
+  };
+};
+
+export const AddContact = (uid, data) => {
+  console.log("AddContact");
+  //   console.log(key);
+  //   console.log(uid);
+  fetch("http://localhost:3001/api/add", {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json; charset=UTF-8"
+    },
+    body: JSON.stringify({
+      uid: uid,
+      data: data
+    })
+  });
+  return {
+    type: NEW_SELECT,
+    selected: false,
+    contact: [{ name: "" }]
+  };
+};
+
+export const UpdateContact = (uid, contact, data) => {
+  console.log("UpdateContact");
+  //   console.log(key);
+  //   console.log(uid);
+  fetch("http://localhost:3001/api/update", {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json; charset=UTF-8"
+    },
+    body: JSON.stringify({
+      uid: uid,
+      contact: contact,
+      data: data
     })
   });
   return {
