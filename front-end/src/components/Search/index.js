@@ -68,8 +68,6 @@ class Search extends Component {
   };
 
   render() {
-    // console.log(this.state);
-
     return (
       <section className="search">
         <Input
@@ -86,8 +84,6 @@ class Search extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
-
   return {
     getStatus: state.request.getStatus,
     contactar: state.request.contactarr
