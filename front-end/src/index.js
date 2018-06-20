@@ -17,18 +17,16 @@ import { Router } from "react-router";
 const history = createHistory();
 const middleware = routerMiddleware(history);
 
-export const store = createStore(
-  reducer,
-  compose(applyMiddleware(middleware))
-  //   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+export const store = createStore(reducer, composeEnhancers(applyMiddleware(middleware)));
+
 
 ReactDOM.render(
-  <Provider store={store}>
-    <Router history={history}>
-      <App />
-    </Router>
-  </Provider>,
-  document.getElementById("root")
+    <Provider store={store}>
+        <Router history={history}>
+            <App />
+        </Router>
+    </Provider>,
+    document.getElementById("root")
 );
 registerServiceWorker();

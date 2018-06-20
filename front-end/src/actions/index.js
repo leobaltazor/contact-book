@@ -35,7 +35,7 @@ export const setAuthParams = (login, pass) => {
   xhr.setRequestHeader("Content-type", "Application/json");
   xhr.onload = function() {
     const res = JSON.parse(this.responseText);
-    // console.log(res);
+    console.log(res);
     store.dispatch({
       type: SET_AUTH_PARAMS,
       status: false,
@@ -61,7 +61,8 @@ export const setAuthParams = (login, pass) => {
 
 export const logout = () => {
   console.log("logout");
-  localStorage.removeItem("token");
+  sessionStorage.removeItem("token");
+  sessionStorage.removeItem("uid");
   return {
     type: SET_AUTH_PARAMS,
     token: null
