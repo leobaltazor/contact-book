@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";
-import { Form, Message } from "semantic-ui-react";
+import { Form, Message, Button } from "semantic-ui-react";
 import { AddContact, UpdateContact } from "../../actions";
 
 class EditContact extends Component {
@@ -193,15 +193,17 @@ class EditContact extends Component {
                             />
                         </Form.Field>
                     </Form.Group>
+                    <Button.Group attached="bottom">
+                        <Button type="submit">Add Contact</Button>
+                        <Button onClick={this.update}>Update Info</Button>
+                        <Button onClick={this.closeform}>Close</Button>
+                    </Button.Group>
                     <Form.Field />
                     {this.state.validateStatus ? (
                         ""
                     ) : (
                         <Message warning header="Could you check something!" list={Object.values(this.state.errlist)} />
                     )}
-                    <Form.Button type="submit">Add Contact</Form.Button>
-                    <Form.Button onClick={this.update}>Update Info</Form.Button>
-                    <Form.Button onClick={this.closeform}>Close</Form.Button>
                 </Form>
             );
         } else {
